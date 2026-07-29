@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Examples | Hedera — BizFirstAI</title>
+<link rel="stylesheet" href="https://bizfirstai.github.io/UserGuides/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+.bfai-topbar-logo img{height:26px;display:block;}.bfai-topbar{position:fixed;top:0;left:0;right:0;z-index:200;background:#1e2736;border-bottom:1px solid #2d3a4a;height:40px;display:flex;align-items:center;padding:0 20px;}
+.bfai-topbar-right{margin-left:auto;display:flex;gap:6px;}
+.bfai-topbar-right a{font-size:12px;color:#b0c4d8;text-decoration:none;padding:4px 12px;border-radius:5px;display:flex;align-items:center;gap:6px;transition:background 0.15s,color 0.15s;}
+.bfai-topbar-right a:hover{background:rgba(255,255,255,0.08);color:#fff;}
+body{padding-top:40px;}
+nav.sidebar{top:40px;height:calc(100vh - 40px);}
+</style>
+</head>
+<body>
+
+<div class="bfai-topbar">
+  <a href="https://bizfirstai.com" target="_blank" class="bfai-topbar-logo">
+    <img src="https://www.bizfirstai.com/website/assets/Logo/logo.png" alt="BizFirstAI">
+  </a>
+  <div class="bfai-topbar-right">
+    <a href="https://bizfirstai.github.io/UserGuides/" target="_top"><i class="fa-solid fa-house"></i> Portal</a>
+    <a href="https://community.bizfirstai.com" target="_blank"><i class="fa-solid fa-people-group"></i> Community</a>
+  </div>
+</div>
+
+<nav class="sidebar">
+  <div class="sidebar-brand">Hedera<span>Node Reference</span></div>
+  <div class="sidebar-section">This Node</div>
+  <a href="index.html">Overview</a>
+  <a href="01-configuration.html">Configuration</a>
+  <a href="02-networks.html">Networks</a>
+  <a href="03-account-operations.html">Account Operations</a>
+  <a href="04-token-operations.html">Token Operations</a>
+  <a href="05-topic-operations.html">Topic Operations</a>
+  <a href="06-transaction-operations.html">Transaction Operations</a>
+  <a href="07-utility-operations.html">Utility Operations</a>
+  <a href="08-input-output.html">Input &amp; Output</a>
+  <a href="09-examples.html" class="active">Examples</a>
+  <a href="10-troubleshooting.html">Troubleshooting</a>
+  <a href="11-roadmap.html">Roadmap</a>
+  <div class="sidebar-section">Navigation</div>
+  <a href="https://bizfirstai.github.io/UserGuides/Nodes/">&#8592; All Nodes</a>
+  <a href="https://bizfirstai.github.io/UserGuides/">&#8592; Portal</a>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="https://bizfirstai.github.io/UserGuides/" style="color:inherit;text-decoration:none;">BizFirstAI Portal</a> /
+      <a href="https://bizfirstai.github.io/UserGuides/Nodes/" style="color:inherit;text-decoration:none;">Nodes</a> /
+      <a href="index.html">Hedera</a> /
+      Examples
+    </div>
+    <h1>Examples</h1>
+    <p class="subtitle">Worked workflow patterns using the Hedera node</p>
+  </div>
+
+  <h2>1. Check a Balance Before a Payout Step</h2>
+  <p>Guard a downstream payout/transfer action by confirming the treasury account has enough HBAR first.</p>
+  <ol>
+    <li><strong>Hedera</strong> node: <code>resource=account</code>, <code>operation=getBalance</code>, <code>accountId={{treasuryAccountId}}</code></li>
+    <li><strong>Condition</strong> node: <code>balanceHbar &gt;= requiredAmount</code></li>
+    <li>If true, continue to the payout step; if false, route to an alert/notification branch</li>
+  </ol>
+  <div class="callout info">
+    <strong>Why here:</strong> This is a read-only pre-check — it doesn't move funds itself, it just
+    protects a later step (today, likely an off-chain payout or a manual approval) from firing against an
+    account that can't cover it.
+  </div>
+
+  <h2>2. Poll an HCS Topic as a Workflow Trigger</h2>
+  <p>Use a topic as a lightweight event bus: an external system submits messages to it, and a workflow
+  polls for new ones.</p>
+  <ol>
+    <li>Store the last processed <code>sequenceNumber</code> somewhere the workflow can read/write (a variable, a small table row).</li>
+    <li>On each run: <strong>Hedera</strong> node, <code>resource=topic</code>, <code>operation=getMessages</code>, <code>topicId={{topicId}}</code>, <code>sequenceFrom={{lastSeen + 1}}</code></li>
+    <li>For each message returned, parse the JSON payload and branch on its <code>event</code> field.</li>
+    <li>Update the stored <code>sequenceNumber</code> to the highest one seen this run.</li>
+  </ol>
+  <div class="callout success">
+    <strong>Tip:</strong> Keep <code>limit</code> modest (25–50) on a frequent poll — you'll catch up
+    quickly across a few runs rather than requesting a huge page every time.
+  </div>
+
+  <h2>3. Look Up a Token and an Account's Holdings Together</h2>
+  <p>Combine token metadata with a specific account's balance, e.g. to display "Account X holds 500
+  EXT (Example Token)" in a report.</p>
+  <ol>
+    <li><strong>Hedera</strong> node: <code>resource=token</code>, <code>operation=getInfo</code>, <code>tokenId={{tokenId}}</code> → get <code>symbol</code>, <code>decimals</code>, <code>name</code></li>
+    <li><strong>Hedera</strong> node: <code>resource=token</code>, <code>operation=getBalances</code>, <code>accountId={{accountId}}</code> → find the entry matching <code>tokenId</code></li>
+    <li><strong>Transform</strong> step: <code>displayAmount = balance / (10 ^ decimals)</code>, format as <code>"{displayAmount} {symbol}"</code></li>
+  </ol>
+
+  <h2>4. Convert a User-Entered HBAR Amount Before a Downstream Step</h2>
+  <p>A form collects an amount in HBAR from a user; a later step (today, an off-chain ledger entry;
+  eventually, a signed transfer — see <a href="11-roadmap.html">Roadmap</a>) needs tinybar.</p>
+  <ol>
+    <li><strong>Hedera</strong> node: <code>resource=utility</code>, <code>operation=convertUnits</code>, <code>amount={{userInputHbar}}</code>, <code>fromUnit=hbar</code>, <code>toUnit=tinybar</code></li>
+    <li>Pass <code>result</code> (the tinybar amount) into the downstream step's input field.</li>
+  </ol>
+
+  <h2>5. Validate a User-Entered Account ID Before Any Lookup</h2>
+  <ol>
+    <li><strong>Hedera</strong> node: <code>resource=utility</code>, <code>operation=validateAddress</code>, <code>address={{userInput}}</code></li>
+    <li><strong>Condition</strong> node: <code>isValid == true</code></li>
+    <li>If true, proceed to <code>account.getBalance</code> or <code>account.getInfo</code>; if false, return a validation error to the user immediately instead of calling the network.</li>
+  </ol>
+
+</main>
+</body>
+</html>

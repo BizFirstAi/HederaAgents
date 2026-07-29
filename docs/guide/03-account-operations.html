@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account Operations | Hedera — BizFirstAI</title>
+<link rel="stylesheet" href="https://bizfirstai.github.io/UserGuides/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+.bfai-topbar-logo img{height:26px;display:block;}.bfai-topbar{position:fixed;top:0;left:0;right:0;z-index:200;background:#1e2736;border-bottom:1px solid #2d3a4a;height:40px;display:flex;align-items:center;padding:0 20px;}
+.bfai-topbar-right{margin-left:auto;display:flex;gap:6px;}
+.bfai-topbar-right a{font-size:12px;color:#b0c4d8;text-decoration:none;padding:4px 12px;border-radius:5px;display:flex;align-items:center;gap:6px;transition:background 0.15s,color 0.15s;}
+.bfai-topbar-right a:hover{background:rgba(255,255,255,0.08);color:#fff;}
+body{padding-top:40px;}
+nav.sidebar{top:40px;height:calc(100vh - 40px);}
+</style>
+</head>
+<body>
+
+<div class="bfai-topbar">
+  <a href="https://bizfirstai.com" target="_blank" class="bfai-topbar-logo">
+    <img src="https://www.bizfirstai.com/website/assets/Logo/logo.png" alt="BizFirstAI">
+  </a>
+  <div class="bfai-topbar-right">
+    <a href="https://bizfirstai.github.io/UserGuides/" target="_top"><i class="fa-solid fa-house"></i> Portal</a>
+    <a href="https://community.bizfirstai.com" target="_blank"><i class="fa-solid fa-people-group"></i> Community</a>
+  </div>
+</div>
+
+<nav class="sidebar">
+  <div class="sidebar-brand">Hedera<span>Node Reference</span></div>
+  <div class="sidebar-section">This Node</div>
+  <a href="index.html">Overview</a>
+  <a href="01-configuration.html">Configuration</a>
+  <a href="02-networks.html">Networks</a>
+  <a href="03-account-operations.html" class="active">Account Operations</a>
+  <a href="04-token-operations.html">Token Operations</a>
+  <a href="05-topic-operations.html">Topic Operations</a>
+  <a href="06-transaction-operations.html">Transaction Operations</a>
+  <a href="07-utility-operations.html">Utility Operations</a>
+  <a href="08-input-output.html">Input &amp; Output</a>
+  <a href="09-examples.html">Examples</a>
+  <a href="10-troubleshooting.html">Troubleshooting</a>
+  <a href="11-roadmap.html">Roadmap</a>
+  <div class="sidebar-section">Navigation</div>
+  <a href="https://bizfirstai.github.io/UserGuides/Nodes/">&#8592; All Nodes</a>
+  <a href="https://bizfirstai.github.io/UserGuides/">&#8592; Portal</a>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="https://bizfirstai.github.io/UserGuides/" style="color:inherit;text-decoration:none;">BizFirstAI Portal</a> /
+      <a href="https://bizfirstai.github.io/UserGuides/Nodes/" style="color:inherit;text-decoration:none;">Nodes</a> /
+      <a href="index.html">Hedera</a> /
+      Account Operations
+    </div>
+    <h1>Account Operations</h1>
+    <p class="subtitle">resource: <code>account</code> — HBAR balances and account metadata</p>
+  </div>
+
+  <h2>getBalance</h2>
+  <p>Returns an account's HBAR balance plus any HTS tokens it holds.</p>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>accountId</code></td><td>text</td><td>✓ Yes</td><td>Hedera account ID, e.g. <code>0.0.98</code></td></tr>
+      <tr><td><code>network</code></td><td>select</td><td>No</td><td>See <a href="02-networks.html">Networks</a>. Defaults to <code>Hedera:DefaultNetwork</code>.</td></tr>
+    </tbody>
+  </table>
+  <p>Example response:</p>
+  <pre><code>{
+  "accountId": "0.0.98",
+  "balanceTinybars": 500000000,
+  "balanceHbar": 5.0,
+  "tokens": [
+    { "tokenId": "0.0.12345", "balance": 1000, "decimals": 2 }
+  ]
+}</code></pre>
+
+  <h2>getInfo</h2>
+  <p>Returns account metadata beyond just the balance.</p>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>accountId</code></td><td>text</td><td>✓ Yes</td><td>Hedera account ID, e.g. <code>0.0.98</code></td></tr>
+      <tr><td><code>network</code></td><td>select</td><td>No</td><td>See <a href="02-networks.html">Networks</a>. Defaults to <code>Hedera:DefaultNetwork</code>.</td></tr>
+    </tbody>
+  </table>
+  <p>Example response:</p>
+  <pre><code>{
+  "accountId": "0.0.98",
+  "evmAddress": "0x0000000000000000000000000000000000000062",
+  "memo": "treasury account",
+  "autoRenewPeriodSeconds": 7776000,
+  "key": { "type": "ED25519", "key": "302a300506032b6570032100..." },
+  "deleted": false
+}</code></pre>
+
+  <table>
+    <thead><tr><th>Response Field</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>evmAddress</code></td><td>The account's 20-byte EVM-compatible alias address, if one exists.</td></tr>
+      <tr><td><code>memo</code></td><td>Free-text memo set on the account.</td></tr>
+      <tr><td><code>autoRenewPeriodSeconds</code></td><td>How often the account auto-renews (and is charged a renewal fee) if not otherwise deleted.</td></tr>
+      <tr><td><code>key</code></td><td>The account's public key and key type (e.g. ED25519, ECDSA_SECP256K1).</td></tr>
+      <tr><td><code>deleted</code></td><td>Whether the account has been deleted on-network.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <strong>getBalance vs. getInfo:</strong> Use <code>getBalance</code> when you only need the HBAR/token
+    numbers — it's the lighter call. Use <code>getInfo</code> when you need account metadata like the EVM
+    address or key, e.g. before constructing a cross-chain reference.
+  </div>
+
+</main>
+</body>
+</html>

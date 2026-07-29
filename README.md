@@ -30,8 +30,21 @@ Every operation accepts a `network` config key (`mainnet` \| `testnet` \| `previ
 
 | Page | Published URL |
 |---|---|
-| Operation reference (`docs/README.md`) | https://bizfirstai.github.io/HederaAgents/ |
+| Operation reference | https://bizfirstai.github.io/HederaAgents/ |
+| Guide: Overview | https://bizfirstai.github.io/HederaAgents/guide/ |
+| Guide: Configuration | https://bizfirstai.github.io/HederaAgents/guide/01-configuration.html |
+| Guide: Networks | https://bizfirstai.github.io/HederaAgents/guide/02-networks.html |
+| Guide: Account Operations | https://bizfirstai.github.io/HederaAgents/guide/03-account-operations.html |
+| Guide: Token Operations | https://bizfirstai.github.io/HederaAgents/guide/04-token-operations.html |
+| Guide: Topic Operations | https://bizfirstai.github.io/HederaAgents/guide/05-topic-operations.html |
+| Guide: Transaction Operations | https://bizfirstai.github.io/HederaAgents/guide/06-transaction-operations.html |
+| Guide: Utility Operations | https://bizfirstai.github.io/HederaAgents/guide/07-utility-operations.html |
+| Guide: Input & Output | https://bizfirstai.github.io/HederaAgents/guide/08-input-output.html |
+| Guide: Examples | https://bizfirstai.github.io/HederaAgents/guide/09-examples.html |
+| Guide: Troubleshooting | https://bizfirstai.github.io/HederaAgents/guide/10-troubleshooting.html |
+| Guide: Roadmap | https://bizfirstai.github.io/HederaAgents/guide/11-roadmap.html |
 
+Same guide, also published in the portal: [bizfirstai.github.io/UserGuides/Nodes/Hedera](https://bizfirstai.github.io/UserGuides/Nodes/Hedera/)
 Full developer portal: [docs.bizfirstai.com](https://docs.bizfirstai.com)
 
 ## Project layout
