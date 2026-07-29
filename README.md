@@ -1,8 +1,10 @@
 # HederaAgents
 
-Hedera Hashgraph community node for [BizFirst.Ai](https://github.com/BizFirstAi) — a ProcessEngine
+[![BizFirst.Ai](https://www.bizfirstai.com/website/assets/Logo/logo.png)](https://bizfirstai.com)
+
+Hedera Hashgraph community node for [BizFirst.Ai](https://bizfirstai.com) — a ProcessEngine
 `ExecutionNode` (`hedera`) that exposes Hedera Mirror Node reads and utility operations as drag-and-drop
-steps in BizFirst.Ai workflow automations.
+steps in [BizFirst.Ai](https://bizfirstai.com) workflow automations.
 
 ## What it does
 
@@ -24,8 +26,13 @@ signing credential or third-party SDK is required to read data.
 Every operation accepts a `network` config key (`mainnet` \| `testnet` \| `previewnet`), defaulting to
 `Hedera:DefaultNetwork` in application settings.
 
-See [`docs/README.md`](docs/README.md) for the full field-by-field reference, also published at
-[bizfirstai.github.io/HederaAgents](https://bizfirstai.github.io/HederaAgents/) via GitHub Pages.
+## Documentation
+
+| Page | Published URL |
+|---|---|
+| Operation reference (`docs/README.md`) | https://bizfirstai.github.io/HederaAgents/ |
+
+Full developer portal: [docs.bizfirstai.com](https://docs.bizfirstai.com)
 
 ## Project layout
 
@@ -65,6 +72,13 @@ message signing) are next. They'll follow the same partial/service pattern as th
 the community **`Hashgraph`** .NET SDK (bugbytesinc), with the signing key resolved from a vault
 `CRYPTO_WALLET` credential plus payer account id / key algorithm config fields.
 
+## About BizFirst.Ai
+
+[BizFirst.Ai](https://bizfirstai.com) is a workflow automation platform for building AI-driven business
+processes. This node is one of many community connectors that plug into its ProcessEngine — browse the
+full node catalogue and developer guides at [docs.bizfirstai.com](https://docs.bizfirstai.com), or join
+the discussion at [community.bizfirstai.com](https://community.bizfirstai.com).
+
 ## License
 
-Community node maintained by the BizFirst.Ai team.
+Community node maintained by the [BizFirst.Ai](https://bizfirstai.com) team.
