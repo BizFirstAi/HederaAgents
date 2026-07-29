@@ -24,8 +24,8 @@ signing credential or third-party SDK is required to read data.
 Every operation accepts a `network` config key (`mainnet` \| `testnet` \| `previewnet`), defaulting to
 `Hedera:DefaultNetwork` in application settings.
 
-See [`Docs/Operations.md`](Docs/Operations.md) for the full field-by-field reference, or the published
-[GitHub Pages site](https://bizfirstai.github.io/HederaAgents/) for the rendered version.
+See [`docs/README.md`](docs/README.md) for the full field-by-field reference, also published at
+[bizfirstai.github.io/HederaAgents](https://bizfirstai.github.io/HederaAgents/) via GitHub Pages.
 
 ## Project layout
 
