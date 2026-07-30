@@ -28,24 +28,13 @@ Every operation accepts a `network` config key (`mainnet` \| `testnet` \| `previ
 
 ## Documentation
 
-| Page | Published URL |
-|---|---|
-| Operation reference | https://bizfirstai.github.io/HederaAgents/ |
-| Guide: Overview | https://bizfirstai.github.io/HederaAgents/guide/ |
-| Guide: Configuration | https://bizfirstai.github.io/HederaAgents/guide/01-configuration.html |
-| Guide: Networks | https://bizfirstai.github.io/HederaAgents/guide/02-networks.html |
-| Guide: Account Operations | https://bizfirstai.github.io/HederaAgents/guide/03-account-operations.html |
-| Guide: Token Operations | https://bizfirstai.github.io/HederaAgents/guide/04-token-operations.html |
-| Guide: Topic Operations | https://bizfirstai.github.io/HederaAgents/guide/05-topic-operations.html |
-| Guide: Transaction Operations | https://bizfirstai.github.io/HederaAgents/guide/06-transaction-operations.html |
-| Guide: Utility Operations | https://bizfirstai.github.io/HederaAgents/guide/07-utility-operations.html |
-| Guide: Input & Output | https://bizfirstai.github.io/HederaAgents/guide/08-input-output.html |
-| Guide: Examples | https://bizfirstai.github.io/HederaAgents/guide/09-examples.html |
-| Guide: Troubleshooting | https://bizfirstai.github.io/HederaAgents/guide/10-troubleshooting.html |
-| Guide: Roadmap | https://bizfirstai.github.io/HederaAgents/guide/11-roadmap.html |
+- **This site:** [hedera.bizfirstai.com](https://hedera.bizfirstai.com) — quick reference and links
+- **Full guide:** [docs.bizfirstai.com/Nodes/Hedera](https://docs.bizfirstai.com/Nodes/Hedera/) —
+  configuration, networks, every resource's operations, examples, troubleshooting, roadmap
+- **Full developer portal:** [docs.bizfirstai.com](https://docs.bizfirstai.com)
 
-Same guide, also published in the portal: [bizfirstai.github.io/UserGuides/Nodes/Hedera](https://bizfirstai.github.io/UserGuides/Nodes/Hedera/)
-Full developer portal: [docs.bizfirstai.com](https://docs.bizfirstai.com)
+All BizFirst.Ai node documentation is maintained in one place — the
+[UserGuides](https://github.com/BizFirstAi/UserGuides) portal — rather than duplicated per repo.
 
 ## Project layout
 
@@ -54,6 +43,9 @@ src/
 ├── BizFirst.Integration.Hedera.Domain     # Result records + network options (zero deps)
 ├── BizFirst.Integration.Hedera.Services   # Mirror Node REST client + resource services
 └── BizFirst.Ai.ExecutionNodes.Blockchain.Hedera  # Executor: routing, config, operation DTOs
+docs/
+├── index.html  # This site's homepage — quick reference, links out to the full guide
+└── CNAME       # hedera.bizfirstai.com
 ```
 
 Targets **.NET 9**.

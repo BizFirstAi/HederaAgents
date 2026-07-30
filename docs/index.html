@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HederaAgents — BizFirst.Ai Community Node</title>
+<link rel="stylesheet" href="https://docs.bizfirstai.com/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+.bfai-topbar-logo img{height:26px;display:block;}.bfai-topbar{position:fixed;top:0;left:0;right:0;z-index:200;background:#1e2736;border-bottom:1px solid #2d3a4a;height:40px;display:flex;align-items:center;padding:0 20px;}
+.bfai-topbar-right{margin-left:auto;display:flex;gap:6px;}
+.bfai-topbar-right a{font-size:12px;color:#b0c4d8;text-decoration:none;padding:4px 12px;border-radius:5px;display:flex;align-items:center;gap:6px;transition:background 0.15s,color 0.15s;}
+.bfai-topbar-right a:hover{background:rgba(255,255,255,0.08);color:#fff;}
+body{padding-top:40px;}
+main{margin-left:0;max-width:960px;padding:40px 32px;}
+.hero{text-align:center;padding:32px 0 8px;}
+.hero img{height:48px;margin-bottom:16px;}
+.hero h1{font-size:2.2rem;margin:0 0 8px;}
+.hero p.subtitle{font-size:1.1rem;max-width:640px;margin:0 auto;}
+</style>
+</head>
+<body>
+
+<div class="bfai-topbar">
+  <a href="https://bizfirstai.com" target="_blank" class="bfai-topbar-logo">
+    <img src="https://www.bizfirstai.com/website/assets/Logo/logo.png" alt="BizFirstAI">
+  </a>
+  <div class="bfai-topbar-right">
+    <a href="https://docs.bizfirstai.com/" target="_top"><i class="fa-solid fa-house"></i> Portal</a>
+    <a href="https://community.bizfirstai.com" target="_blank"><i class="fa-solid fa-people-group"></i> Community</a>
+    <a href="https://github.com/BizFirstAi/HederaAgents" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+  </div>
+</div>
+
+<main>
+  <div class="hero">
+    <img src="https://www.bizfirstai.com/website/assets/Logo/logo.png" alt="BizFirstAI">
+    <h1>HederaAgents</h1>
+    <p class="subtitle">Hedera Hashgraph community node for BizFirst.Ai — query accounts, tokens, topics, and transactions via the free Mirror Node REST API.</p>
+  </div>
+
+  <div class="callout info">
+    <strong>What it does:</strong> The Hedera node (<code>hedera</code>) exposes Mirror Node
+    reads as BizFirst.Ai workflow operations across five resources — <code>account</code>,
+    <code>token</code>, <code>topic</code>, <code>transaction</code>, and <code>utility</code>.
+    No signing credential or SDK required for anything documented here — every operation is a
+    free, eventually-consistent read.
+  </div>
+
+  <h2>Get Started</h2>
+  <div class="card-grid">
+    <a class="card" href="https://docs.bizfirstai.com/Nodes/Hedera/">
+      <div class="card-icon"><i class="fa-solid fa-book"></i></div>
+      <h3>Full Guide</h3>
+      <p>Configuration, networks, every resource's operations, examples, troubleshooting, roadmap.</p>
+    </a>
+    <a class="card" href="../src/">
+      <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+      <h3>Source Code</h3>
+      <p>Browse the full C# implementation — Domain, Services, and Executor projects.</p>
+    </a>
+    <a class="card" href="https://github.com/BizFirstAi/HederaAgents">
+      <div class="card-icon"><i class="fa-brands fa-github"></i></div>
+      <h3>GitHub Repo</h3>
+      <p>Star it, file an issue, or open a PR.</p>
+    </a>
+  </div>
+
+  <h2>Operations at a Glance</h2>
+  <table>
+    <thead><tr><th>Resource</th><th>Operations</th></tr></thead>
+    <tbody>
+      <tr><td><code>account</code></td><td><code>getBalance</code>, <code>getInfo</code></td></tr>
+      <tr><td><code>token</code> (HTS)</td><td><code>getInfo</code>, <code>getBalances</code></td></tr>
+      <tr><td><code>topic</code> (HCS)</td><td><code>getMessages</code></td></tr>
+      <tr><td><code>transaction</code></td><td><code>get</code></td></tr>
+      <tr><td><code>utility</code></td><td><code>convertUnits</code>, <code>validateAddress</code></td></tr>
+    </tbody>
+  </table>
+  <p>Full field-by-field reference for every operation: see the <a href="https://docs.bizfirstai.com/Nodes/Hedera/">Full Guide</a>.</p>
+
+  <h2>Networks</h2>
+  <table>
+    <thead><tr><th>Network</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>mainnet</code></td><td>Production, real HBAR</td></tr>
+      <tr><td><code>testnet</code></td><td>Default — free faucet HBAR</td></tr>
+      <tr><td><code>previewnet</code></td><td>Early-access features</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Roadmap</h2>
+  <p>Signed writes (account create/transfer, token mint/associate/transfer, topic create/submit,
+  message sign) are next, following the same pattern as the reads above. They require the
+  community <strong><code>Hashgraph</code></strong> .NET SDK, with the signing key resolved from
+  a vault <code>CRYPTO_WALLET</code> credential.</p>
+
+  <h2>About BizFirst.Ai</h2>
+  <p><a href="https://bizfirstai.com">BizFirst.Ai</a> is a workflow automation platform for
+  building AI-driven business processes. This node is one of many community connectors that
+  plug into its ProcessEngine — browse the full node catalogue and developer guides at
+  <a href="https://docs.bizfirstai.com">docs.bizfirstai.com</a>, or join the discussion at
+  <a href="https://community.bizfirstai.com">community.bizfirstai.com</a>.</p>
+
+</main>
+</body>
+</html>
